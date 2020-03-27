@@ -33,3 +33,6 @@
 
 STM32Cube*
 *.zip
+
+builddir*
+instdir*
