@@ -31,8 +31,6 @@ if(${STM32_TYPE} STREQUAL "L0")
 #-specs=nosys.specs \
 	
 	set(COMMON_WARNING_FLAGS "\
--Werror \
--pedantic-errors \
 -Wall \
 -Wextra \
 -Wpedantic \
@@ -40,6 +38,8 @@ if(${STM32_TYPE} STREQUAL "L0")
 -Wcast-qual \
 -Wconversion \
 ")
+#-Werror \
+#-pedantic-errors \
 	
 	set(CPP_WARNING_FLAGS "\
 -Wctor-dtor-privacy \
