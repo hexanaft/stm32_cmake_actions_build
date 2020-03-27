@@ -58,7 +58,7 @@ jobs:
           choco install ninja cmake gcc-arm-embedded
           ninja --version
           cmake --version
-          gcc-arm-embedded --version
+          arm-none-eabi-gcc --version
         # cmd "${{ matrix.config.environment_script }}"
 
       - name: Install dependencies on ubuntu
