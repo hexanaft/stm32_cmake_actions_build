@@ -1,6 +1,7 @@
 #include "main.h"
+
 void SystemInit (void)
-{    
+{
 
 }
 int main(void)
@@ -12,7 +13,8 @@ int main(void)
   }
 }
 
-void _exit (int status)
+int _exit (int status)
 {
-	while (1) {}		/* Make sure we hang here */
+    (void)status;
+    while (1) {}        /* Make sure we hang here */
 }

@@ -25,7 +25,7 @@ jobs:
         - {
             name: "Windows Latest MinGW",
             os: windows-latest,
-            artifact: "build_on_windows.7z",
+            artifact: "build_on_windows.zip",
             build_type: "Release",
             cc: "gcc",
             cxx: "g++",
@@ -35,7 +35,7 @@ jobs:
         - {
             name: "Ubuntu_GCC_9",
             os: ubuntu-latest,
-            artifact: "build_on_ubuntu.7z",
+            artifact: "build_on_ubuntu.zip",
             build_type: "Release",
             cc: "gcc",
             cxx: "g++",
@@ -88,7 +88,6 @@ jobs:
           echo Update ninja =======================================================================
           echo ninja version before
           ninja --version
-          # wget https://github.com/ninja-build/ninja/releases/download/v1.10.0/ninja-linux.zip
           wget https://github.com/ninja-build/ninja/releases/latest/download/ninja-linux.zip
           sudo unzip ninja-linux.zip -d /usr/local/bin/
           sudo update-alternatives --install /usr/bin/ninja ninja /usr/local/bin/ninja 1 --force
@@ -97,8 +96,6 @@ jobs:
           echo Update cmake =======================================================================
           echo cmake version before
           cmake --version
-          # curl --silent "https://api.github.com/repos/Kitware/CMake/releases/latest" | sed -n 's/.*tag_name":\s"\(.*\)".*/\1/p' | head -2
-          # wget https://github.com/Kitware/CMake/releases/latest/download/cmake-3.16.5-Linux-x86_64.sh
           cmake_version=$(curl --silent "https://api.github.com/repos/Kitware/CMake/releases/latest" | sed -n 's/.*tag_name":\s"\(.*\)".*/\1/p' | head -2 | cut -c 2-)
           echo cmake download latest v$cmake_version version
           wget https://github.com/Kitware/CMake/releases/download/v$cmake_version/cmake-$cmake_version-Linux-x86_64.sh

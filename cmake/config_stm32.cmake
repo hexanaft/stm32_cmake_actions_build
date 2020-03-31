@@ -1,60 +1,51 @@
 
-
-#	-mcpu=cortex-m0 \ # Cortex m0
-#	-mthumb \
-#	-ffunction-sections \
-#	-fdata-sections 
-#	-flto \
-#	-g -fno-common -fmessage-length=0 -specs=nosys.specs")
-
-
 if(${STM32_TYPE} STREQUAL "L0")
 	message(STATUS "Stm32 type: " ${STM32_TYPE})
-	
-	set(COMMON_FLAGS "\
--mthumb \
--mcpu=cortex-m0 \
--mabi=aapcs \
-")
 
-	set(COMMON_C_CXX_FLAGS "\
--fno-builtin \
--fno-common \
--ffunction-sections \
--fdata-sections \
--fomit-frame-pointer \
--fno-unroll-loops \
--ffast-math \
--ftree-vectorize \
--fmessage-length=0 \
-")
-#-specs=nosys.specs \
-	
-	set(COMMON_WARNING_FLAGS "\
--Wall \
--Wextra \
--Wpedantic \
--Wcast-align \
--Wcast-qual \
--Wconversion \
-")
-#-Werror \
-#-pedantic-errors \
-	
-	set(CPP_WARNING_FLAGS "\
--Wctor-dtor-privacy \
--Wduplicated-branches \
--Wduplicated-cond \
--Wextra-semi \
--Wfloat-equal \
--Wlogical-op \
--Wnon-virtual-dtor \
--Wold-style-cast \
--Woverloaded-virtual \
--Wredundant-decls \
--Wsign-conversion \
--Wsign-promo \
-")
+        set(COMMON_FLAGS "" CACHE INTERNAL "Reset COMMON_FLAGS")
+        set(COMMON_FLAGS "${COMMON_FLAGS} -mthumb"          CACHE INTERNAL "Switch to ARM THUMB")
+        set(COMMON_FLAGS "${COMMON_FLAGS} -mcpu=cortex-m0"  CACHE INTERNAL "Set CPU to Cortex-M0")
+        set(COMMON_FLAGS "${COMMON_FLAGS} -mabi=aapcs"      CACHE INTERNAL "Set ABI to aapcs")
+        set(COMMON_FLAGS "${COMMON_FLAGS} -flto")
+
+        set(COMMON_C_CXX_FLAGS "" CACHE INTERNAL "Reset COMMON_C_CXX_FLAGS")
+        set(COMMON_C_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -fno-builtin")
+        set(COMMON_C_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -fno-common")
+        set(COMMON_C_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -ffunction-sections")
+        set(COMMON_C_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -fdata-sections")
+        set(COMMON_C_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -fomit-frame-pointer")
+        set(COMMON_C_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -fno-unroll-loops")
+        set(COMMON_C_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -ffast-math")
+        set(COMMON_C_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -ftree-vectorize")
+        set(COMMON_C_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -fmessage-length=0")
+        #set(COMMON_C_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -specs=nosys.specs")
+        set(COMMON_C_CXX_FLAGS "${COMMON_C_CXX_FLAGS} -ffat-lto-objects")
+
+        set(COMMON_WARNING_FLAGS "" CACHE INTERNAL "Reset COMMON_WARNING_FLAGS")
+        set(COMMON_WARNING_FLAGS "${COMMON_WARNING_FLAGS} -Wall")
+        set(COMMON_WARNING_FLAGS "${COMMON_WARNING_FLAGS} -Wextra")
+        set(COMMON_WARNING_FLAGS "${COMMON_WARNING_FLAGS} -Wpedantic")
+        set(COMMON_WARNING_FLAGS "${COMMON_WARNING_FLAGS} -Wcast-align")
+        set(COMMON_WARNING_FLAGS "${COMMON_WARNING_FLAGS} -Wcast-qual")
+        set(COMMON_WARNING_FLAGS "${COMMON_WARNING_FLAGS} -Wconversion")
+
+        set(COMMON_WARNING_FLAGS "${COMMON_WARNING_FLAGS} -Werror")
+        set(COMMON_WARNING_FLAGS "${COMMON_WARNING_FLAGS} -pedantic-errors")
+
+        set(CPP_WARNING_FLAGS "" CACHE INTERNAL "Reset CPP_WARNING_FLAGS")
+        set(CPP_WARNING_FLAGS "${CPP_WARNING_FLAGS} -Wctor-dtor-privacy")
+        set(CPP_WARNING_FLAGS "${CPP_WARNING_FLAGS} -Wduplicated-branches")
+        set(CPP_WARNING_FLAGS "${CPP_WARNING_FLAGS} -Wduplicated-cond")
+        set(CPP_WARNING_FLAGS "${CPP_WARNING_FLAGS} -Wextra-semi")
+        set(CPP_WARNING_FLAGS "${CPP_WARNING_FLAGS} -Wfloat-equal")
+        set(CPP_WARNING_FLAGS "${CPP_WARNING_FLAGS} -Wlogical-op")
+        set(CPP_WARNING_FLAGS "${CPP_WARNING_FLAGS} -Wnon-virtual-dtor")
+        set(CPP_WARNING_FLAGS "${CPP_WARNING_FLAGS} -Wold-style-cast")
+        set(CPP_WARNING_FLAGS "${CPP_WARNING_FLAGS} -Woverloaded-virtual")
+        set(CPP_WARNING_FLAGS "${CPP_WARNING_FLAGS} -Wredundant-decls")
+        set(CPP_WARNING_FLAGS "${CPP_WARNING_FLAGS} -Wsign-conversion")
+        set(CPP_WARNING_FLAGS "${CPP_WARNING_FLAGS} -Wsign-promo")
+        set(CPP_WARNING_FLAGS "${CPP_WARNING_FLAGS} -Wno-unused-parameter")
 	
 	set(CMAKE_C_FLAGS   "${COMMON_FLAGS} ${COMMON_C_CXX_FLAGS} ${COMMON_WARNING_FLAGS}" CACHE INTERNAL "c compiler flags")
 	set(CMAKE_CXX_FLAGS "${COMMON_FLAGS} ${COMMON_C_CXX_FLAGS} ${COMMON_WARNING_FLAGS} ${CPP_WARNING_FLAGS}" CACHE INTERNAL "cxx compiler flags")
