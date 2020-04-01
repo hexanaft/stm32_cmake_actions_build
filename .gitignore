@@ -37,3 +37,5 @@ STM32Cube*
 builddir*
 instdir*
 *.user
+
+OkaFirmware*
